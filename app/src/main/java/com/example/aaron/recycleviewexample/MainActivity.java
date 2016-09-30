@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
-
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+        rvContacts.addItemDecoration(itemDecoration);
         // Initialize contacts
         contacts = Contact.createContactsList(20);
         // Create adapter passing in the sample user data
@@ -32,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
         // Set layout manager to position the items
         rvContacts.setLayoutManager(new LinearLayoutManager(this));
         // That's all!
+
+        rvContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tx = ((TextView) v.findViewById(R.id.contact_name));
+                //Toast.makeText(v, tx.getText().toString(), Toast.LENGTH_SHORT);
+                Log.d("DEB", tx.getText().toString());
+            }
+        });
+
 
 
     }
