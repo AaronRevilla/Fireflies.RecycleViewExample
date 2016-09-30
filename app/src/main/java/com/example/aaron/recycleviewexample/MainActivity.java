@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Contact> contacts;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvContacts.addItemDecoration(itemDecoration);
+        rvContacts.setItemAnimator(new SlideInUpAnimator());
         // Initialize contacts
         contacts = Contact.createContactsList(20);
         // Create adapter passing in the sample user data
@@ -38,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
         rvContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView tx = ((TextView) v.findViewById(R.id.contact_name));
+                TextView tx = ((TextView) v.findViewById(v.getId()));
                 //Toast.makeText(v, tx.getText().toString(), Toast.LENGTH_SHORT);
                 Log.d("DEB", tx.getText().toString());
             }
         });
+
+
 
 
 
@@ -51,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
     public void addContact(View view) {
 
         // Add a new contact
-        contacts.add(0, new Contact("Barney", true));
+        contacts.add(1, new Contact("Barney", true));
         // Notify the adapter that an item was inserted at position 0
-        rvContacts.getAdapter().notifyItemInserted(0);
+        rvContacts.getAdapter().notifyItemInserted(1);
 
     }
 
